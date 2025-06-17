@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8501
 
 # Jalankan streamlit
-CMD ["streamlit", "run", "main_final.py", "--server.port=8501", "--server.enableCORS=false"]
+CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS=false"]

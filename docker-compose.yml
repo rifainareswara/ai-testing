@@ -1,0 +1,14 @@
+services:
+  financial-ai:
+    container_name: financial-ai
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - BUCKET_NAME=rifai-ai-bucket
+      - AWS_REGION=us-east-1
+    restart: unless-stopped

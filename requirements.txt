@@ -1,0 +1,9 @@
+boto3
+streamlit
+pandas
+langchain
+langchain-community
+faiss-cpu
+reportlab
+openpyxl
+python-dotenv

@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: financial-ai-deployment
+  namespace: financial-ai
+  labels:
+    app: financial-ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: financial-ai
+  template:
+    metadata:
+      labels:
+        app: financial-ai
+    spec:
+      containers:
+      - name: financial-ai-container
+        # Menggunakan local image yang sudah di-build
+        image: financial-ai:local
+        imagePullPolicy: Never  # PENTING: Jangan pull dari registry
+        ports:
+        - containerPort: 8501
+          name: streamlit-port
+
+        # Environment variables dari ConfigMap
+        env:
+        - name: BUCKET_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: financial-ai-config
+              key: BUCKET_NAME
+        - name: BEDROCK_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: financial-ai-config
+              key: BEDROCK_REGION
+
+        # Environment variables dari Secret (.env file)
+        envFrom:
+        - secretRef:
+            name: financial-ai-secret
+
+        # Resource limits (disesuaikan untuk lokal)
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+        # Health checks untuk Streamlit
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        # Security context
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+
+      restartPolicy: Always

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: financial-ai-config
+  namespace: financial-ai
+data:
+  BUCKET_NAME: "rifai-ai-bucket"
+  BEDROCK_REGION: "us-east-1"

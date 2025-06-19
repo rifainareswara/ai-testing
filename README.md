@@ -1,3 +1,5 @@
+![Magnus_AI_Project.png](Magnus_AI_Project.png)
+
 ```bash
 pip install -r requirements.txt
 ```

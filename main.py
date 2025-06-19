@@ -5,8 +5,7 @@ import uuid
 import pandas as pd
 import json
 from datetime import datetime
-from typing import List, Dict, Any
-import time
+from typing import List, Dict
 import sqlite3
 
 from langchain_community.embeddings import BedrockEmbeddings

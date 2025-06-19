@@ -7,3 +7,4 @@ faiss-cpu
 reportlab
 openpyxl
 python-dotenv
+tabulate

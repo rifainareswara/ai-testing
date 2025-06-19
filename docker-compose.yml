@@ -8,7 +8,9 @@ services:
       - "8501:8501"
     volumes:
       - .:/app
+    env_file:
+      - .env
     environment:
-      - BUCKET_NAME=rifai-ai-bucket
-      - AWS_REGION=us-east-1
+      - BUCKET_NAME=rifai-ai-bucket  # override jika perlu
+      - BEDROCK_REGION=us-east-1     # atau tambahan khusus
     restart: unless-stopped

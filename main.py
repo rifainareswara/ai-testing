@@ -823,3 +823,26 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+from tabulate import tabulate
+
+def print_all_tables():
+    print("📋 Menampilkan semua variabel bertipe list/dict:\n")
+    for name, val in globals().items():
+        if name.startswith("__") or callable(val):
+            continue
+
+        print(f"\n🔹 {name}")
+        if isinstance(val, dict):
+            print(tabulate(val.items(), headers=["Key", "Value"], tablefmt="github"))
+        elif isinstance(val, list):
+            if all(isinstance(item, dict) for item in val):
+                print(tabulate(val, headers="keys", tablefmt="github"))
+            elif all(not isinstance(item, (list, dict)) for item in val):
+                print(tabulate([[item] for item in val], headers=[name], tablefmt="github"))
+            else:
+                print(tabulate(val, tablefmt="github"))
+
+# Panggil fungsi untuk menampilkan tabel
+print_all_tables()

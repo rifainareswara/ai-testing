@@ -24,6 +24,7 @@ from io import BytesIO
 # Konfigurasi AWS
 AWS_REGION = "us-east-1"
 BUCKET_NAME = os.getenv("BUCKET_NAME", "rifai-ai-bucket")
+CHAT_DB_S3_KEY = "db/financial_ai_chats.db"
 
 # Database untuk menyimpan chat history
 DB_PATH = "financial_ai_chats.db"

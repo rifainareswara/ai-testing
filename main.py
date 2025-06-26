@@ -775,7 +775,7 @@ def render_chat_interface():
 
 def main():
     st.set_page_config(
-        page_title="Financial AI Assistant",
+        page_title="Magnus AI Assistant",
         page_icon="💰",
         layout="wide",
         initial_sidebar_state="expanded"
